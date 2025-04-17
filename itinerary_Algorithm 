@@ -1,0 +1,36 @@
+1. Initialize
+•	Check if an itinerary.json file exists.
+•	If yes, load the existing itinerary data into a list.
+•	If no, start with an empty list.
+2. Main Loop
+•	Display menu options:
+1.	Add an entry
+2.	View itinerary
+3.	Delete an entry
+4.	Save and exit
+•	Accept user's choice.
+a. If choice is Add Entry:
+•	Prompt user for:
+	Day
+	Location
+	Activity
+	Notes 
+•	Create a dictionary with this information.
+•	Append the dictionary to the itinerary list.
+•	Notify user that entry is added.
+ b. If choice is View Itinerary:
+•	If the list is empty, display "No entries."
+•	Else, for each entry:
+o	Display day, location, activity, and notes neatly.
+c. If choice is Delete Entry:
+•	Display current itinerary with numbered entries.
+•	Ask user to input the entry number they want to delete.
+•	Validate input.
+•	Remove the selected entry from the list.
+•	Notify user that entry is deleted.
+d. If choice is Save and Exit:
+•	Save the itinerary list to itinerary.json in JSON format.
+•	End the program.
+Handle Invalid Inputs
+•	If user enters an invalid menu option or invalid delete number:
+o	Show an error message and loop back to the menu.

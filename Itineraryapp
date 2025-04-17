@@ -1,0 +1,86 @@
+# Itinerary-app
+import json
+import os
+
+ITINERARY_FILE = "itinerary.json"
+
+def load_itinerary():
+    if os.path.exists(ITINERARY_FILE):
+        with open(ITINERARY_FILE, "r") as f:
+            return json.load(f)
+    return []
+
+def save_itinerary(itinerary):
+    with open(ITINERARY_FILE, "w") as f:
+        json.dump(itinerary, f, indent=2)
+
+def add_entry(itinerary):
+    day = input("Day (e.g., Day 1): ")
+    location = input("Location: ")
+    activity = input("Activity: ")
+    notes = input("Notes (optional): ")
+
+    entry = {
+        "day": day,
+        "location": location,
+        "activity": activity,
+        "notes": notes
+    }
+
+    itinerary.append(entry)
+    print("Entry added.")
+
+def view_itinerary(itinerary):
+    if not itinerary:
+        print("No itinerary entries found.")
+        return
+
+    print("\n Your Itinerary:")
+    for i, item in enumerate(itinerary, 1):
+        print(f"\nEntry {i}:")
+        print(f"  Day: {item['day']}")
+        print(f"  Location: {item['location']}")
+        print(f"  Activity: {item['activity']}")
+        print(f"  Notes: {item['notes']}")
+
+def delete_entry(itinerary):
+    view_itinerary(itinerary)
+    if not itinerary:
+        return
+    try:
+        index = int(input("Enter the entry number to delete: ")) - 1
+        if 0 <= index < len(itinerary):
+            removed = itinerary.pop(index)
+            print(f"Removed entry for {removed['day']} at {removed['location']}")
+        else:
+            print("Invalid entry number.")
+    except ValueError:
+        print("Please enter a valid number.")
+
+def main():
+    itinerary = load_itinerary()
+
+    while True:
+        print("\n=== Itinerary Planner ===")
+        print("1. Add entry")
+        print("2. View itinerary")
+        print("3. Delete entry")
+        print("4. Save and exit")
+
+        choice = input("Choose an option: ")
+
+        if choice == "1":
+            add_entry(itinerary)
+        elif choice == "2":
+            view_itinerary(itinerary)
+        elif choice == "3":
+            delete_entry(itinerary)
+        elif choice == "4":
+            save_itinerary(itinerary)
+            print("✍️ Itinerary saved. Goodbye!")
+            break
+        else:
+            print("Invalid option. Try again.")
+
+
+main()
